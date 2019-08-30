@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>司机管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+		<style type="text/css">
+			::-webkit-input-placeholder{  
+		    color:#989898;  
+		    font-size:14px;
+		} 
+		.driver_manage{width:92%;margin:10px auto;}
+		.mui-input-group .mui-input-row:after,.mui-input-group:after,.mui-input-group:before{background-color:#fff;}
+		.mui-pull-right{margin-right: 6px;}
+		.mui-input-row .driver_input{border:1px solid #0f6594;border-radius:5px;position:absolute;z-index:0;}
+		.mui-input-row .mui-input-clear~.mui-icon-clear{right:1.1rem;height:38px;}
+		.driver_search{font-size:17px;background-color:#0f6594;border-radius:5px;height:40px;line-height: 20px;color:#fff;display: inline-block;padding:10px;position:absolute;right:0;border-bottom-left-radius: 0;border-top-left-radius: 0;border:none;}
+		
+		/*地图样式*/
+		.gaode_map{width:92%;margin:.32rem;}
+		html,body,#container{
+          width: 100%;
+          height: 100%;
+        }
+        #container{width:92%;margin:0 4%;}
+        .input-item-text, input[type=text], input[type=date], select{height: calc(3.12rem + 2px);}
+	
+		</style>
+		
+	</head>
+
+	<body>		
+		<div class="mui-content">
+			
+			<!--搜索框-->
+			<div class="driver_manage">
+				<form class="mui-input-group">
+				    <div class="mui-input-row" style="position:relative;">
+				        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机姓名/手机号">
+				        <span class="driver_search">搜索</span>
+				    </div>
+				</form>
+			</div>	
+		</div>
+		<div id="container"></div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();	
+		</script>
+		<!-- 加载地图JSAPI脚本 -->
+			<script src="https://webapi.amap.com/maps?v=1.4.14&key=57914650831662143780a5396f0ab528"></script>
+			<script>
+			    var map = new AMap.Map('container', {
+			        resizeEnable: true, //是否监控地图容器尺寸变化
+			        zoom:11, //初始化地图层级
+			        center: [116.397428, 39.90923] //初始化地图中心点
+			    });
+			</script>
+	</body>
+
+</html>

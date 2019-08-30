@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>调度车队</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<!--调用日历选择器-->
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.picker.min.js"></script>
+		<script type="text/javascript" src="js/mui.dtpicker.js"></script>
+		<!--自定义时间选择-->
+		<script type="text/javascript" src="js/datetime.js"></script>
+		<style type="text/css">
+			*,ul,li{margin:0;padding:0;}
+			body,.mui-content{background-color:#fff;}
+			.sub-bar-title{background-color:#0f6594;box-shadow:none;}
+			.sub-title{color:#fff;}	
+			.mui-table-view:before,.mui-table-view:after{background-color:#fff;}
+			.mui-bar{box-shadow: 0 0 0 #fff;}
+			.dispatcher_time{font-size:.28rem;padding:.3rem .3rem 0 .35rem;color:#000;font-weight: 700;}
+			.dispatcher_content{background-color:#fff;padding:0.1rem 0.32rem;overflow:hidden;/* display:flex;flex-direction: row;flex-flow: nowrap; */}
+			.dispatch_img{width:0.54rem;vertical-align: -0.9rem;}
+			.f_datetime,.driver_truename,.driver_number{font-size:0.28rem;color:#000;font-weight: 700;}
+			.driver_number{color:#666;font-weight: normal;}
+			.z_time,.z_address{width:0.44rem;display: block;}
+			.mui-table-view-cell{padding:0.3rem;}
+			.mui-pull-right{margin-right:-0.3rem;color:#666;font-size:0.28rem;}
+			.dispatch_rightimg{margin-left:.5rem;padding-top:.25rem;}
+			.z_address{margin-top:.55rem;}
+			.driver_list:after{background-color:#e0e0e0;}
+			.driver_truename{display:inline-block;width:1.2rem;margin-left:-.3rem;margin-right:.3rem;}
+			.driver_delete{vertical-align: -0.5rem;}
+			.add_driver{padding:0.29rem 0.32rem 0;}
+			.add_driver img{width:0.54rem;vertical-align: middle;}
+			.add_driver span{color:#1ca5eb;font-size:0.28rem;}
+			.dispatch_description{padding:0.25rem 0 1rem 0.35rem;font-size:0.28rem;color:#666;background-color:#fff;line-height:.5rem;}
+			.dispatch_btn{margin:0.58rem auto;text-align: center;}
+			.dispatch_btn button{background-color:#0f6594;color:#fff;font-size:0.3rem;border:none;width:4rem;height:0.8rem;}
+			
+			.driverleft_img{float:left;width:7%;}
+			.driverleft_img img{width:0.54rem;vertical-align: middle;}	
+			.drivericon b{color:#000}		
+			.drivericon img{width:0.54rem;vertical-align: middle;}
+			
+			.add_drivercar img{width: 0.54rem;vertical-align: middle;}
+			.z_addbtn{color:#1ca5eb;font-size:0.28rem;}
+			.z_addbtn img{margin-right:.3rem;}
+			.add_carnumber{width:2.85rem;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav sub-bar-title">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff;"></a>
+		    <h1 class="mui-title sub-title">调度车队</h1>
+		</header>
+		
+		<!--时间地点-->
+		<div class="mui-content" id="dispatcher_car">
+			<div class="dispatcher_wrap">
+				<p class="dispatcher_time">时间/地点</p>
+			</div>
+			<div class="dispatcher_content">
+					<div style="float:left;width:7%;">
+						<img src="images/dispatch/qidian@2x.png" class="dispatch_img"/>						
+					</div>
+					<div style="float:left;margin-right:.2rem;width:83%;">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" id="begintime">
+								<span class="f_datetime">时间</span>
+								<span class="mui-pull-right">2018-09-06  10：00</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<span class="f_datetime">托运地点</span>
+								<span class="mui-pull-right">深圳市龙华区金河田商务中心</span>
+							</li>
+						</ul>
+					</div>
+					<div class="dispatch_rightimg">
+						<img src="images/dispatch/rili@2x.png" class="z_time"/>
+						<img src="images/dispatch/dingwei@2x.png" class="z_address"/>
+					</div>
+			</div>
+			<div class="dispatcher_content">
+					<div style="float:left;width:7%;">
+						<img src="images/dispatch/zhong@2x.png" class="dispatch_img"/>						
+					</div>
+					<div style="float:left;margin-right:.2rem;width:83%;">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" id="totime">
+								<span class="f_datetime">时间</span>
+								<span class="mui-pull-right">2018-09-06  10：00</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<span class="f_datetime">目的地点</span>
+								<span class="mui-pull-right">深圳市龙华区金河田商务中心</span>
+							</li>
+						</ul>
+					</div>
+					<div class="dispatch_rightimg">
+						<img src="images/dispatch/rili@2x.png" class="z_time"/>
+						<img src="images/dispatch/dingwei@2x.png" class="z_address"/>
+					</div>
+			</div>
+			
+			<!--司机车辆-->
+			<div class="mui-content" id="dispatcher_car">
+				<div class="dispatcher_content">
+					<p class="dispatcher_time">司机/车辆</p>
+				</div>
+				
+				<div class="dispatcher_content" id="list1">
+						<div style="float:left;width:7%;" onclick="delDriver();">
+							<img src="images/dispatch/shanchu@2x.png" class="dispatch_img driver_delete"/>						
+						</div>
+						<div style="float:left;margin-left:0.33rem;width:78%;">
+							<ul class="mui-table-view driver_list">
+								<li class="mui-table-view-cell">
+									<span class="driver_truename" id="drivername">周星星</span>
+									<span class="driver_number" id="drivertel">1869275561</span>
+									<span class="mui-pull-right drivericon">
+										<img src="images/dispatch/shanchu@2x.png"/>
+										<b id="drivernumber">粤A88888</b>
+									</span>
+									
+								</li>
+							</ul>
+						</div>
+				</div>
+				<div class="dispatcher_content" id="list2">
+						<div style="float:left;width:7%;" onclick="delDriver();">
+							<img src="images/dispatch/shanchu@2x.png" class="dispatch_img driver_delete"/>						
+						</div>
+						<div style="float:left;margin-left:0.33rem;width:78%;">
+							<ul class="mui-table-view driver_list">
+								<li class="mui-table-view-cell">
+									<span class="driver_truename">周星星</span>
+									<span class="driver_number">1869275561</span>
+									<span class="mui-pull-right drivericon">
+										<img src="images/dispatch/shanchu@2x.png"/>
+										<b>粤A88888</b>
+									</span>
+									
+								</li>
+							</ul>
+						</div>
+				</div>
+				
+				<div class="dispatcher_content" id="list3">
+						<div style="float:left;width:7%;" onclick="delDriver();">
+							<img src="images/dispatch/shanchu@2x.png" class="dispatch_img driver_delete"/>						
+						</div>
+						<div style="float:left;margin-left:0.33rem;width:78%;">
+							<ul class="mui-table-view driver_list">
+								<li class="mui-table-view-cell">
+									<span class="driver_truename">周星星</span>
+									<span class="driver_number">1869275561</span>
+									<span class="mui-pull-right drivericon">
+										<img src="images/dispatch/shanchu@2x.png"/>
+										<b>粤A88888</b>
+									</span>
+									
+								</li>
+							</ul>
+						</div>
+				</div>
+				
+				<div class="dispatcher_content" id="list4">
+						<div style="float:left;width:7%;" onclick="delDriver();">
+							<img src="images/dispatch/shanchu@2x.png" class="dispatch_img driver_delete"/>						
+						</div>
+						<div style="float:left;margin-left:0.33rem;width:78%;">
+							<ul class="mui-table-view driver_list">
+								<li class="mui-table-view-cell">
+									<span class="driver_truename">周星星</span>
+									<span class="driver_number">1869275561</span>
+									<span class="mui-pull-right drivericon">
+										<img src="images/dispatch/shanchu@2x.png"/>
+										<b>粤A88888</b>
+									</span>
+									
+								</li>
+							</ul>
+						</div>
+				</div>
+				
+				<div class="dispatcher_content add_drivercar">
+					<span class="z_addbtn" onclick="addDriver();">
+						<img src="images/dispatch/tianjia@2x.png" />添加更多司机和车辆
+					</span>
+					<span class="mui-pull-right add_carnumber" onclick="addCar();">
+						<img src="images/dispatch/tianjia@2x.png" />
+					</span>
+				</div>
+				
+				
+				
+				
+				<div class="dispatcher_wrap">
+					<p class="dispatcher_time">调度说明</p>
+				</div>
+				<div class="dispatch_description">
+					所有参与的司机，商务十点出发赶往金河田商务大楼888号，运走大厦所有公司财产，大家平分
+				</div>
+				<div class="dispatch_btn">
+					<button type="button" class="mui-btn mui-btn-primary" id="startdispatch">发起调度</button> 
+				</div>
+		</div>
+		<script type="text/javascript">
+			mui.init();
+			//点击添加司机和车辆打开的页面
+			function addDriver(){
+				mui.openWindow({
+					url: 'add_driver.html'
+				});
+			}
+			
+			//点击添加车辆打开的页面
+			function addCar(){
+				mui.openWindow({
+					url: 'add_car.html'
+				});
+			}
+			
+			//点击删除司机
+			function delDriver(){
+				mui.confirm('您确定要删除吗？','',new Array('取消','确定'),function(e){
+				   if(e.index == 1){
+				   	document.getElementById('list1').style.display='none';
+				   }else
+				   {
+				   	mui.toast('取消');
+				   }
+				});
+			}
+			
+			mui.plusReady(function(){					
+					//接收司机管理页面传过来的参数					
+					window.addEventListener('driverList',function(event){
+						console.log(event.detail.driverName);
+						var driverName = event.detail.driverName;
+						var driverNumber = event.detail.driverNumber;
+						var drivertel = event.detail.driverTel;
+						document.getElementById('drivername').innerText = driverName;
+						document.getElementById('drivernumber').innerText = driverNumber;
+						document.getElementById('drivertel').innerText = drivertel;					
+				});
+			document.getElementById('startdispatch').addEventListener('tap',function(){
+				mui.openWindow({
+					url: 'dispatch_manage.html'
+				})
+			});
+		});
+		</script>
+	</body>
+
+</html>

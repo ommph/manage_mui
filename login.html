@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>登录页面</title>
+    <script src="js/rem.js"></script>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <style type="text/css">
+    	body{background-color: #fff;}
+    	.mui-content{background-color:#fff;}
+    	.f_login{text-align: center;}
+    	.f_login img{width:2.28rem;margin: 2.03rem auto 1rem;}
+    	.mui-input-row{padding-bottom:5px;width:92%;margin:0 auto;}  	   		.mui-input-group:before,.mui-input-group:after{background-color:#fff;}
+    .mui-input-group:after{height: 0;}
+    	.mui-input-row label~input,.mui-input-row label{float:none;}
+    	::-webkit-input-placeholder{  
+		    color:#c6c6c6;  
+		    font-size:0.28rem;
+		 } 
+		.mui-button-row{width:92%;margin:0 auto;}
+		.mui-btn-primary{width:100%;border-radius:0.49rem;margin-top:0.98rem;padding:0.27rem 2.23rem;font-size:0.36rem;}
+		.mui-input-row .mui-input-password~.mui-icon-eye{right:0.26rem;}
+		#login{background-color:#0f6594;font-size:18px;border:none;}
+		.f_contacttel{height:40px;color:#0f6594;position:fixed;bottom:0;left:35%;font-size:0.24rem;}
+		.f_contacttel a{color:#0f6594;}
+		.mui-input-row label{padding:0.11rem 0;}
+		.mui-input-group .mui-input-row:after{left:0;}
+    </style>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<div class="mui-content" style="width: 92%;margin:0 auto;">
+		<div class="f_login">
+			<img src="images/logo@2x.png" />
+		</div>
+		<form class="mui-input-group" id="input_form">
+		    <div class="mui-input-row">
+		    	<label>
+		        <img src="images/zhanghao@2x.png" style="width:0.44rem;vertical-align: middle;"/>
+		        </label>
+		   		<input type="text" class="mui-input-clear" placeholder="请输入账号/手机号">
+		    </div>
+		    <div class="mui-input-row" style="margin-top:20px;">
+		    	<label>
+		    		<img src="images/mima@2x.png" style="width:0.44rem;vertical-align: middle;"/>
+		    	</label>		        
+		        <input type="password" class="mui-input-password" placeholder="请输入密码">
+		    </div>
+		    <div class="mui-button-row">
+		        <button type="button" class="mui-btn mui-btn-primary" id="login">登&nbsp;&nbsp;录</button>		        
+		</form>
+			<div class="f_contacttel">联系电话：
+				<a href="tel:400888888">400-888-888</a>
+			</div>
+	</div>
+	<script type="text/javascript">
+		
+		mui.plusReady(function(){
+			var oLogin = document.getElementById('login');
+			oLogin.addEventListener('tap',function(){
+				mui("#input_form input").each(function() {
+				//若当前input为空，则alert提醒 
+				if(!this.value || this.value.trim() == "") {
+				    var label = this.previousElementSibling;
+				    mui.alert(label.innerText + "不允许为空");
+				    check = false;
+				    return false;
+				}
+				}); //校验通过，继续执行业务逻辑 
+				if(check){
+				    mui.alert('验证通过!')
+				}
+			})
+			
+			var bottomEl = document.querySelector('.f_contacttel');  
+			// 可见区域高度减去元素的高度  
+			bottomEl.style.top = document.documentElement.clientHeight - 40 + 'px';  
+		})
+	</script>
+</body>
+</html>

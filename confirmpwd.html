@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>确认密码</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+			<style type="text/css">
+			::-webkit-input-placeholder{  
+		    color:#c6c6c6;  
+		    font-size:0.28rem;
+		    }
+			.mui-navigate-right:after, .mui-push-right:after{right:0;}			
+			.mui-table-view-cell:after{left:0;}
+			.set_wrap{width:95%;margin:0 auto;}
+			.mui-btn-primary{width:100%;border-radius:0.49rem;margin-top:0.98rem;padding:0.27rem 2.23rem;font-size:0.34rem;}
+			#loginout{background-color:#0f6594;border:none;}
+			.set_text{font-size:0.3rem;color:#282828;}
+			.mui-content>.mui-table-view.verify_tab{margin-top:0;}
+			.verify_tab:before{background-color:#fff;}
+			.verify_tab:after{background-color:#c8c7cc;}
+			.verify_list{padding:0;width:100%;height:0.8rem;line-height:0.8rem;margin:0 auto;background-color:#f4f4f4;}
+			.verify_list span{display: inline-block;font-size:0.28rem;width:49%;text-align: center;}
+			.bind_tel{background:url(images/edit1.png) no-repeat;width:49%;height:0.8rem;text-align:center;background-size:contain;color:#989898;}
+			.verify_actived{color:#0f6594;}
+			input[type=text].verify_input{border:none;margin-bottom:0;padding:0.1rem 0;height:0.8rem;font-size:0.32rem;}
+			input[type=submit].mui-btn{border:1px solid #000;background-color:#fff;color:#000;}
+			.mui-btn-primary{width:100%;background-color:#0f6594;border:none;border-radius:0.05rem;}
+			.login_text{margin:.5rem auto;text-align: center;font-size:.25rem;color:#c6c6c6;}
+			input[type=password]{border:none;margin-bottom:0;}
+			 .mui-input-row .mui-input-password~.mui-icon-eye{top:0.4rem;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav sub-bar-title">
+		    <h1 class="mui-title sub-title">确认密码</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view verify_tab">
+				    <li class="mui-table-view-cell verify_list">
+				        <span class="bind_tel">1验证身份</span>
+				        <span class="verify_actived">2修改密码</span>
+				    </li>
+			</ul>	    
+			<div class="set_wrap">
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell mui-input-row">
+				        <input type="password" class="mui-input-password verify_input" placeholder="请输入您的新密码">
+				    </li>
+				    <li class="mui-table-view-cell mui-input-row" >
+				        <input type="password" class="mui-input-password verify_input" placeholder="请确认新密码">
+				    </li>				   
+				</ul>
+				<button type="button" class="mui-btn mui-btn-primary">确定</button>
+				<p class="login_text">修改后需要重新登录账号</p>
+		    </div>
+				
+		</div>
+		<script src="js/mui.min.js"></script>
+		
+	</body>
+
+</html>

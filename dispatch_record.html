@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>调度记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<!--调用日历选择器-->
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.picker.min.js"></script>
+		<script type="text/javascript" src="js/mui.dtpicker.js"></script>
+		<!--自定义时间选择-->
+		<script type="text/javascript" src="js/datetime.js"></script>
+		<style type="text/css">
+			.mui-bar{box-shadow: 0 0 0 #fff;}
+			.dispatch_warp{width:95%;background-color:#fff;border-radius:0.05rem;margin:0 auto;position:relative;z-index: 0;}
+			.dispatch_top{position:relative;z-index: -1;}
+			.dispatch_number{background:url(images/dispatch/renwubianhao@2x.png) no-repeat;width:2.2rem;height:2.2rem;background-size:cover;display:inline-block;background-position:-.15rem -.75rem;color:#fff;font-size:0.26rem;padding-left:.3rem;padding-top:.1rem;}
+			.dispatch_record{background:url(images/dispatch/dispatch_record.png) no-repeat;width:2.2rem;height:2.2rem;background-size:cover;display:inline-block;background-position:-.15rem -.75rem;color:#fff;font-size:0.26rem;padding-left:.3rem;padding-top:.1rem;}
+			.dispatch_dsnumber{color:#126692;font-size:0.26rem;border-bottom:.01rem dashed #1ca5eb;display:inline-block;padding-bottom:.08rem;}
+			.dispatch_state{font-size:0.26rem;color:#ff3d33;margin-top:.1rem;margin-right:0.17rem;border-bottom:.01rem dashed #ff3d33;padding-bottom:.08rem;}
+			.dispatch_list{margin-top:-1.5rem;}
+			.mui-table-view:before{background-color:#fff;}
+			.dispatch_listimg{width:0.44rem;vertical-align:middle;}
+			.mui-media-body span{color:#000;font-size:0.24rem;}
+			.mui-media-body span.z_rwlx{display:inline-block;width:1.5rem;}
+			.mui-table-view-cell:after{height:0;}
+			.mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before{height:1px;margin-right:0.15rem;margin-bottom:0.1rem;}
+			.mui-table-view:after{background-color:#fff;}
+			.dispatch_last:after{height:0;}
+			.mui-media-body span.mui-pull-right{color:#666;font-size:0.24rem;}
+			.dispatch_last:last-child:after, .dispatch_last:last-child:before{height:0;}
+			.dispatch_button{margin:0.71rem auto 0;text-align:center;padding-bottom:0.57rem;}
+			.mui-btn{padding:0.14rem 0.53rem;}
+			.mui-btn-primary,.mui-btn-primary:enabled:active{background-color:#1ca5eb;border:none;margin-right:0.7rem;}
+			.mui-btn-success,.mui-btn-success:enabled:active{background-color:#0f6594;border:none;}
+			.dispatch_roadline {margin-top: -.5rem;}
+			.dispatch_roadline img{width:0.44rem;}
+			.dispatch_numberright{font-weight: normal;margin-left:.2rem;}
+			
+			.dispatch_recordtext{color:#4c4c4c;border-bottom: .01rem dashed #4c4c4c;}
+			.dispatch_recordfinish{color:#4c4c4c;border-bottom: .01rem dashed #4c4c4c;}
+			
+			.mui-backdrop{background-color:rgba(0,0,0,0);display: none;}
+			.mui-popover .mui-popover-arrow:after{display: none;}
+			.mui-popover{width:95%;border-radius:0;background-color:#fff;box-shadow: none;}
+			.mui-popover .mui-table-view{border-radius:0;background-color:#fff;}
+			.mui-pull-right b{font-weight: normal;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">		    
+		    <h1 class="mui-title">调度记录</h1>
+		</header>>
+		<div class="mui-content" id="dispatch_manage">
+			<div class="dispatch_warp">
+				<div class="dispatch_top">
+					<span class="dispatch_number dispatch_record">任务编号	</span>
+					<span class="dispatch_dsnumber dispatch_recordtext">JDSD20192202668</span>
+					<span class="dispatch_state mui-pull-right dispatch_recordfinish">已完成</span>
+				</div>
+				
+				<div class="dispatch_list">
+						<ul class="mui-table-view">
+						    <li class="mui-table-view-cell mui-media">
+						        <a href="javascript:;">
+						            <img class="mui-pull-left dispatch_listimg" src="images/dispatch/renwu@2x.png" />
+						            <div class="mui-media-body">
+						                <span class="z_rwlx">任务类型：</span>
+						                <span class='mui-ellipsis'>拖运任务</span>
+						            </div>
+						        </a>
+						    </li>
+						    <li class="mui-table-view-cell mui-media">
+						        <a href="javascript:;">
+						            <img class="mui-pull-left dispatch_listimg" src="images/dispatch/mididi@2x.png" />
+						            <div class="mui-media-body">
+						                <span class="z_rwlx">目的地：</span>
+						                <span class='mui-ellipsis'>深圳市龙岗区万荣商贸大厦</span>
+						            </div>
+						        </a>
+						    </li>	
+						     <li class="mui-table-view-cell mui-media" >
+						        <a href="javascript:;">
+						            <img class="mui-pull-left dispatch_listimg" src="images/dispatch/chufashijian@2x.png" />
+						            <div class="mui-media-body" id="begintime">
+						                <span class="z_rwlx">出发时间：</span>
+						                <span class='mui-ellipsis'>2019-02-12 10：00</span>						                
+						            </div>
+						            <span class="mui-pull-right dispatch_roadline">
+						                	<img src="images/dispatch/luxian@2xrecord.png"  />
+						            </span>
+						        </a>
+						    </li>
+						     <li class="mui-table-view-cell mui-media">
+						        <a href="javascript:;">
+						            <img class="mui-pull-left dispatch_listimg" src="images/dispatch/daodashijian@2x.png" />
+						            <div class="mui-media-body" id="totime">
+						                <span class="z_rwlx">到达时间：</span>
+						                <span class='mui-ellipsis'>2019-02-12 12：00</span>
+						            </div>
+						        </a>
+						    </li>
+						  					   
+						</ul>						
+					
+						
+						<ul class="mui-table-view">
+						    <li class="mui-table-view-cell mui-media dispatch_last">
+						        <a href="javascript:;">
+						            <img class="mui-pull-left dispatch_listimg" src="images/dispatch/cheduizhang@2x.png" />
+						            <div class="mui-media-body">
+						                <span class="z_rwlx">车队长</span>
+						                <span class='mui-pull-right'>张大</span>
+						            </div>
+						        </a>
+						    </li>
+						    <li class="mui-table-view-cell mui-media dispatch_last">
+						        <a href="javascript:;">
+						            <img class="mui-pull-left dispatch_listimg" src="images/dispatch/siji@2x.png" />
+						            <div class="mui-media-body">
+						                <span class="z_rwlx">司机</span>
+						                <span class='mui-pull-right' id="changename">
+						                	<b>周崇飞</b>
+						                	<b class="dispatch_numberright">车牌号：粤B66666</b>
+						                </span>
+						            </div>
+						        </a>
+						    </li>
+						    <li class="mui-table-view-cell mui-media dispatch_last">
+						        <a href="#popover">
+						            <div class="mui-media-body">
+						                <span class="z_rwlx"></span>
+						                <span class='mui-pull-right' id="openPopover">						                	
+						                	展开<span class="mui-icon mui-icon-arrowdown"></span>
+						                </span>
+						            </div>
+						        </a>
+						    </li>	
+						</ul>
+				</div>
+				
+				<!--点击展开显示的内容-->				
+				<div id="popover" class="mui-popover">
+				  <ul class="mui-table-view" id="showlist">
+					    <li class="mui-table-view-cell">
+					    	<a href="javascript:;">							           
+							            <div class="mui-media-body">
+							                <span class='mui-pull-right'>
+							                	<b>周崇飞1</b>
+							                	<b class="dispatch_numberright">车牌号：粤B66666</b>
+							                </span>
+							            </div>
+							</a>
+					    </li>
+					    <li class="mui-table-view-cell">
+				    		<a href="javascript:;">						           
+						            <div class="mui-media-body">
+						                <span class='mui-pull-right'>
+						                	<b>周崇飞2</b>
+						                	<b class="dispatch_numberright">车牌号：粤B66666</b>
+						                </span>
+						            </div>
+						    </a>
+				    </li>
+				    <li class="mui-table-view-cell">
+				    	<a href="javascript:;">						           
+						            <div class="mui-media-body">
+						                <span class='mui-pull-right'>
+						                	<b>周崇飞3</b>
+						                	<b class="dispatch_numberright">车牌号：粤B66666</b>
+						                </span>
+						            </div>
+						</a>
+				    </li>
+				  </ul>
+				</div>
+				
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			mui.init();				
+			//点击展开弹出的内容
+			mui.plusReady(function(){
+				mui('#showlist').on('tap','li',function(e){
+					var changeName = document.getElementById('changename');
+					changeName.innerText = this.innerText;
+					document.getElementById('popover').style.display = 'none';
+				
+				})
+			})
+		</script>
+		
+		
+	</body>
+
+</html>

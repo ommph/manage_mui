@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>人车管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-table-view-cell:after,.mui-table-view:after,.mui-table-view:before{background-color:#fff;}
+			.mui-table-view{margin-top:0.62rem;}
+			.driver_list ul li{color:#000;font-size:16px;font-family: "微软雅黑";font-weight:bold;box-shadow: 0.05rem 0.05rem 0.05rem #f3f3f3;margin:0.3rem;padding:0.28rem 0.3rem;}
+			.mui-navigate-right:after{color:#9d9d9d;font-size:20px;}
+			.mui-pull-left{width:10%;}
+			.driver_text{font-size:0.32rem;}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<!--轮播图开始-->
+				<div class="mui-slider">
+				  <div class="mui-slider-group mui-slider-loop" style="margin-top:15px;">
+				    <!--支持循环，需要重复图片节点-->
+				    <div class="mui-slider-item mui-slider-item-duplicate">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <div class="mui-slider-item">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <div class="mui-slider-item">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <div class="mui-slider-item">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <!--支持循环，需要重复图片节点-->
+				    <div class="mui-slider-item mui-slider-item-duplicate">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" />
+				    	</a>
+				    </div>
+				  </div>				  
+				  <!--小圆点-->
+				  <div class="mui-slider-indicator">
+				    <div class="mui-indicator mui-active"></div>
+				    <div class="mui-indicator"></div>
+				    <div class="mui-indicator"></div>
+				  </div>	
+			<!--轮播图结束-->
+		</div>
+		
+		<div class="driver_list">
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell" id="driver">
+			        <a class="mui-navigate-right driver_text">
+			        	<img src="images/sijiguanli@2x.png" style="width:0.44rem;vertical-align:middle;"/>
+			                                      司机管理
+			        </a>
+			    </li>
+			    <li class="mui-table-view-cell" id="car">
+			        <a class="mui-navigate-right driver_text">
+			        	<img src="images/cheliangguanli@2x.png" style="width:0.44rem;vertical-align:middle;"/>
+			        	车辆管理
+			        </a>
+			    </li>
+			</ul>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();			
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				//获得slider插件对象
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+				  interval:3000//自动轮播周期，若为0则不自动播放，默认为0；
+				});	
+				
+				document.getElementById('driver').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'driver_manage.html'
+					})
+				})
+				
+				document.getElementById('car').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'car_manage.html'
+					})
+				})
+				
+				
+				
+			})
+		</script>
+	</body>
+
+</html>

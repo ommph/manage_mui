@@ -1,0 +1,79 @@
+{
+	"index.html": {
+		"resources": [
+			"home.html"
+		],
+		"refer": [
+			"home.html",
+			"my.html",
+			"realtime.html",
+			"carpeople.html"
+		]
+	},
+	"home.html": {
+		"refer": [
+			"dispatch_manage.html",
+			"dispatcher_car.html",
+			"dispatch_record.html",
+			"pie_record.html",
+			"dispatch_task.html"
+		],
+		"resources": []
+	},
+	"carpeople.html": {
+		"refer": [
+			"driver_manage.html",
+			"car_manage.html",
+			"select_car.html"
+		],
+		"resources": []
+	},
+	"driver_manage.html": {
+		"refer": [
+			"dispatcher_car.html"
+		],
+		"resources": []
+	},
+	"realtime.html": {
+		"refer": [
+			"dispatcher_car.html"
+		],
+		"resources": []
+	},
+	"dispatcher_car.html": {
+		"refer": [
+			"driver_manage.html",
+			"dispatch_manage.html",
+			"add_driver.html",
+			"add_car.html"
+		],
+		"resources": []
+	},
+	"dispatch_manage.html": {
+		"refer": [
+			"dispatcher_car.html"
+		],
+		"resources": []
+	},
+	"my.html": {
+		"refer": [
+			"set.html"
+		]
+	},
+	"set.html": {
+		"refer": [
+			"aboutus.html",
+			"verify_identity.html"
+		]
+	},
+	"verify_identity.html": {
+		"refer": [
+			"confirmpwd.html"
+		]
+	},
+	"dispatch_task.html": {
+		"refer": [
+			"dispatcher_car.html"
+		]
+	}
+}

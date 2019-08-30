@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>验证身份</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">
+			::-webkit-input-placeholder{  
+		    color:#c6c6c6;  
+		    font-size:0.28rem;
+		    } 
+			.mui-navigate-right:after, .mui-push-right:after{right:0;}			
+			.mui-table-view-cell:after{left:0;}
+			.set_wrap{width:95%;margin:0 auto;}
+			.mui-btn-primary{width:100%;border-radius:0.49rem;margin-top:0.98rem;padding:0.27rem 2.23rem;font-size:0.34rem;}
+			#loginout{background-color:#0f6594;border:none;}
+			.set_text{font-size:0.3rem;color:#282828;}
+			.mui-content>.mui-table-view.verify_tab{margin-top:0;}
+			.verify_tab:before{background-color:#fff;}
+			.verify_tab:after{background-color:#c8c7cc;}
+			.verify_list{padding:0;width:100%;height:0.8rem;line-height:0.8rem;margin:0 auto;}
+			.verify_list span{display: inline-block;font-size:0.28rem;width:49%;text-align: center;}
+			.verify_actived{background:url(images/edit2.png) no-repeat;width:49%;height:0.8rem;text-align:center;background-size:contain;}
+			.verify_actived{color:#0f6594;}
+			.bind_tel{color:#989898;}
+			input[type=text].verify_input{border:none;margin-bottom:0;padding:0.1rem 0;height:0.8rem;font-size:0.32rem;}
+			input[type=submit].mui-btn{border:1px solid #000;background-color:#fff;color:#000;}
+			.mui-btn-primary{width:100%;background-color:#0f6594;border:none;border-radius:0.05rem;}
+			.mui-input-row .mui-input-clear~.mui-icon-clear{top:0.4rem;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav sub-bar-title">
+		    <h1 class="mui-title sub-title">验证身份</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view verify_tab">
+				    <li class="mui-table-view-cell verify_list">
+				        <span class="verify_actived">1验证身份</span>
+				        <span class="bind_tel">2绑定手机号</span>
+				    </li>
+			</ul>	    
+			<div class="set_wrap">
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell">
+				        <input type="text" class="mui-input-clear verify_input" value="13621053788" readonly="">
+				        <input type="submit" value="获取验证码" name="" id="getcode" class="mui-btn">
+				    </li>
+				    <li class="mui-table-view-cell mui-input-row" >
+				        <input type="text" class="mui-input-clear verify_input" placeholder="请输入验证码">
+				    </li>				   
+				</ul>
+				<button type="button" class="mui-btn mui-btn-primary" id="confirm">确定</button>
+		    </div>
+				
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				document.getElementById('confirm').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'confirmpwd.html',
+						id: 'confirmpwd.html'
+					})
+				});
+				
+			})
+		</script>
+		
+		<script type="text/javascript">  
+            var wait=60;  
+            function time(o) {  
+                    if (wait == 0) {  
+                        o.removeAttribute("disabled");            
+                        o.value="获取验证码";  
+                        o.style.background = "#fff";
+                        wait = 60;  
+                    } else {  
+                        o.setAttribute("disabled", true);  
+                        o.value="" + wait + "s后重新获取"; 
+                        o.style.background = "#fff";
+                        o.style.color = "#666";
+                        wait--;  
+                        setTimeout(function() {  
+                            time(o)  
+                        },  
+                        1000)  
+                    }  
+                }  
+            document.getElementById("getcode").onclick=function(){time(this);}
+        </script>
+	</body>
+
+</html>

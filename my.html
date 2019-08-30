@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-table-view:before{background-color:#fff;}
+			.mui-navigate-right:after, .mui-push-right:after{right:0;}	
+			.mui-table-view:after{background-color:#fff;} 		
+			.mui-table-view-cell:after{left:0;}
+			.set_wrap{width:95%;margin:0.94rem auto;}
+			.my_wrap{background:url(images/beijing@2x.png) no-repeat;width:100%;height:4.81rem;background-size:cover;margin:0 auto;text-align:center;}
+			.mui-table-view-cell{padding:0.15rem;margin-top:0.34rem;}
+			.my_wrap img{width:1.7rem;padding-top:2.02rem;}
+			.mylist_img{width:0.44rem;vertical-align: -.1rem;;}
+			.mylist_company{font-size:0.32rem;color:#282828;}
+			.mylist_comname{font-size:0.28rem;color:#989898;}
+			.set_btn{width:95%;box-shadow: 0 0.03rem 0.15rem rgba(0,0,0,0.09);position:fixed;bottom:0.3rem;padding:0.3rem;}
+			.mui-navigate-right:after{color:#989898;font-size:0.3rem;}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="my_wrap">
+				<img src="images/touxiang@2x.png"  />
+			</div>
+			
+			<div class="set_wrap">
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell">
+				    	<img src="images/gongsimingcheng@2x.png" class="mylist_img"/>
+				    	<span class="mylist_company">公司名称</span>
+				    	<span class="mylist_comname mui-pull-right">深圳市腾浪信息技术有限公司</span>
+				    </li>
+				    <li class="mui-table-view-cell">
+				    	<img src="images/xingming@2x.png" class="mylist_img"/>
+				    	<span class="mylist_company">姓名</span>
+				    	<span class="mylist_comname mui-pull-right">张三</span>
+				    </li>
+				    <li class="mui-table-view-cell">
+				    	<img src="images/shoujihao@2x.png" class="mylist_img"/>
+				    	<span class="mylist_company">手机号</span>
+				    	<span class="mylist_comname mui-pull-right">13621053788</span>
+				    </li>
+				    <li class="mui-table-view-cell">
+				    	<img src="images/kefurexian@2x.png" class="mylist_img"/>
+				    	<span class="mylist_company">客服热线</span>
+				    	<span class="mylist_comname mui-pull-right">0755-123456</span>
+				    </li>
+				    
+				    <li class="mui-table-view-cell set_btn" id="myset">				    	
+				    	<img src="images/shezhi@2x.png" class="mylist_img"/>
+				    	<span class="mylist_company">设置</span>
+				    	<span class="mylist_comname mui-navigate-right"></span>
+				    	
+				    </li>
+				    
+				</ul>				
+		    </div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				document.getElementById('myset').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'set.html'	
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

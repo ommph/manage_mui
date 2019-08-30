@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>添加司机</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">
+			::-webkit-input-placeholder{  
+		    color:#989898;  
+		    font-size:14px;
+		} 
+		.mui-table-view .mui-media, .mui-table-view .mui-media-body{padding-top:.11rem;}
+		.driver_manage{width:92%;margin:10px auto;}
+		.mui-input-group .mui-input-row:after,.mui-input-group:after,.mui-input-group:before{background-color:#fff;}
+		.mui-pull-right{margin-right: 6px;}
+		.mui-input-row .driver_input{border:1px solid #0f6594;border-radius:5px;position:absolute;z-index:0;}
+		.mui-input-row .mui-input-clear~.mui-icon-clear{right:1.1rem;height:38px;}
+		.driver_search{font-size:17px;background-color:#0f6594;border-radius:5px;height:40px;line-height: 20px;color:#fff;display: inline-block;padding:10px;position:absolute;right:0;border-bottom-left-radius: 0;border-top-left-radius: 0;}
+		
+		/*列表样式*/
+		.mui-table-view:before{background-color:#fff;}
+		.driver_list{width:92%;margin:0 auto;}
+		.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size:25px;}
+		.mui-checkbox input[type=checkbox], .mui-radio input[type=radio],.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{left:0;}
+		.mui-table-view-cell{padding: 11px 0 11px 7px;}
+		.mui-checkbox.mui-left label, .mui-radio.mui-left label{padding-left: 0.48rem;}
+		.driver_name,.mui-ellipsis{color:#282828;font-size:0.28rem;}
+		.mui-pull-right{color:#0f6594;margin-top:-.4rem;font-size:0.32rem;}
+		.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{color:#0f6594;}
+		.mui-table-view-cell:after{left:0;}
+		.drivertel{margin-right: .28rem;}
+		.driver_listcon{margin-top:.2rem;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav sub-bar-title">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff;"></a>
+		    <h1 class="mui-title sub-title">添加司机</h1>
+		    <span id="finish" class="mui-pull-right" style="color:#fff;font-size:0.32rem;padding-top:0.2rem;margin-top:0;">完成</span>
+		</header>		
+		
+		<div class="mui-content">
+			<!--搜索框-->
+			<div class="driver_manage">
+				<form class="mui-input-group">
+				    <div class="mui-input-row" style="position:relative;">
+				        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机姓名/手机号">
+				        <span class="driver_search">搜索</span>
+				    </div>
+				</form>
+			</div>		
+				
+			<!--列表内容-->
+			<div class="driver_list">
+				<ul class="mui-table-view" id="driver">
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="1">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="one" type="checkbox" class="rds">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername1">张三1</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber1">京NXOP86123</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel1">13621053788</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="2">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="two" type="checkbox">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername2">张三2</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber2">京NXOP86456</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel2">18132786515</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="3">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="two" type="checkbox">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername2">张三3</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber2">京NXOP86456</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel2">18132786515</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="4">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="two" type="checkbox">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername2">张三4</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber2">京NXOP86456</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel2">18132786515</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="5">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="two" type="checkbox">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername2">张三5</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber2">京NXOP86456</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel2">18132786515</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="6">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="two" type="checkbox">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername2">张三6</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber2">京NXOP86456</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel2">18132786515</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media driver_listcon" id="7">
+				        <a href="javascript:;">
+				            <div class="mui-input-row mui-checkbox mui-left" style="float:left;">
+							  <label></label>
+							  <input name="checkbox1" value="two" type="checkbox">
+							</div>
+				            <div class="mui-media-body">
+				                <p class="driver_name" id="drivername2">张三7</p>
+				                <!--<p class='mui-ellipsis' id="drivernumber2">京NXOP86456</p>-->
+				                <span class="mui-pull-right drivertel" id="drivertel2">18132786515</span>
+				            </div>
+				            
+				        </a>
+				    </li>
+				    
+				    			    				    
+			</div>
+		
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();			
+			var driverName = document.getElementById('drivername1').innerText;
+			//var driverNumber = document.getElementById('drivernumber1').innerText;
+			var driverTel = document.getElementById('drivertel1').innerText;
+			mui.plusReady(function(){				
+			  var detailPage = 					
+			  mui.preload({url:'dispatcher_car.html',id:'dispatcher_car.html'});
+			    //通过mui.fire()方法可触发目标窗口的自定义事件
+			  	mui('#driver').on('tap', 'li', function(e){		
+			  	input[type=checkbox].setAttribute('checked') ='checked';
+				mui.fire(detailPage,'driverList',{id:this.getAttribute('id'),driverName:driverName,driverTel:driverTel});
+				//mui.openWindow({id:'dispatcher_car.html'}); 
+			  });
+			  
+			  document.getElementById('finish').addEventListener('tap',function(){
+				  mui.openWindow({id:'dispatcher_car.html'}); 
+			  })	  
+			 
+			});
+		</script>
+	</body>
+
+</html>

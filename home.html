@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>管理端首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">			
+			.f_indexlist{margin:0 auto;}
+			.f_indexlist ul{display: flex;flex-direction: row;flex-wrap: wrap;-webkit-padding-start: 0;}
+			.f_indexlist ul li{list-style: none;width:45%;padding:0.3rem 0;box-shadow: 0 0.03rem 0.15rem rgba(0,0,0,0.09);text-align: center;font-size:0.32rem;margin:0.2rem auto;}
+			.z_listone{color:#5c9cf2;}
+			.z_listtwo{color:#24af99;}
+			.f_indexlist ul li img{display: block;width:0.54rem;text-align: center;margin:0 auto;margin-bottom:0.24rem;}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<!--轮播图开始-->
+				<div class="mui-slider">
+				  <div class="mui-slider-group mui-slider-loop" style="margin-top:15px;">
+				    <!--支持循环，需要重复图片节点-->
+				    <div class="mui-slider-item mui-slider-item-duplicate">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <div class="mui-slider-item">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <div class="mui-slider-item">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <div class="mui-slider-item">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" width="100%"/>
+				    	</a>
+				    </div>
+				    <!--支持循环，需要重复图片节点-->
+				    <div class="mui-slider-item mui-slider-item-duplicate">
+				    	<a href="#">
+				    		<img src="images/banner@2x.png" />
+				    	</a>
+				    </div>
+				  </div>				  
+				  <!--小圆点-->
+				  <div class="mui-slider-indicator">
+				    <div class="mui-indicator mui-active"></div>
+				    <div class="mui-indicator"></div>
+				    <div class="mui-indicator"></div>
+				  </div>	
+			<!--轮播图结束-->				
+		</div>
+		<div class="f_indexlist">
+				<ul>
+					<li class="z_listone" id="dispatch_manage">
+						<img src="images/paidanguanli@2x.png" />
+						派单管理
+					</li>
+					<li class="z_listone" id="dispatcher_order">
+						<img src="images/diaoduminlin@2x.png" />
+						调度命令
+					</li>
+					<li class="z_listtwo" id="pie_record">
+						<img src="images/paidanjilu@2x.png" />
+						派单记录
+					</li>
+					<li class="z_listtwo" id="dispatch_record">
+						<img src="images/diaodujilu@2x.png" />
+						调度记录
+					</li>
+				</ul>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();			
+		</script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				//获得slider插件对象
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+				  interval:3000//自动轮播周期，若为0则不自动播放，默认为0；
+				});	
+				
+				//点击派单管理进入的子页面
+				document.getElementById('dispatch_manage').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'dispatch_manage.html',
+						id:'dispatch_manage.html',
+						styles:{
+					      top:'0px',//新页面顶部位置
+					      bottom:'0px',//新页面底部位置
+					      width:'100%',//新页面宽度，默认为100%
+					      height:'100%'//新页面高度，默认为100%					      
+					    },
+					    extras:{
+					        //自定义扩展参数，可以用来处理页面间传值
+					    },
+					});
+				});
+				
+				//点击调度命令进入调度任务的页面
+				document.getElementById('dispatcher_order').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'dispatch_task.html',
+						id: 'dispatch_task.html',
+						styles:{
+					      top:'0px',//新页面顶部位置
+					      bottom:'0px',//新页面底部位置
+					      width:'100%',//新页面宽度，默认为100%
+					      height:'100%'//新页面高度，默认为100%
+					      
+					    },
+					    extras:{
+					        //自定义扩展参数，可以用来处理页面间传值
+					    },
+					});
+				});
+				
+				//点击派单记录进入pie_record.html的页面
+				document.getElementById('pie_record').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'pie_record.html',
+						id:'pie_record.html',
+						styles:{
+					      top:'0px',//新页面顶部位置
+					      bottom:'0px',//新页面底部位置
+					      width:'100%',//新页面宽度，默认为100%
+					      height:'100%'//新页面高度，默认为100%
+					      
+					    },
+					    extras:{
+					        //自定义扩展参数，可以用来处理页面间传值
+					    },
+					});
+				});
+				
+				//点击调度记录进入dispatch_record.html的页面
+				document.getElementById('dispatch_record').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'dispatch_record.html',
+						id:'dispatch_record.html',
+						styles:{
+					      top:'0px',//新页面顶部位置
+					      bottom:'0px',//新页面底部位置
+					      width:'100%',//新页面宽度，默认为100%
+					      height:'100%'//新页面高度，默认为100%
+					      
+					    },
+					    extras:{
+					        //自定义扩展参数，可以用来处理页面间传值
+					    },
+					});
+				});
+			})
+		</script>
+	</body>
+
+</html>

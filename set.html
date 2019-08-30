@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-navigate-right:after, .mui-push-right:after{right:0;}
+			.mui-table-view:after{background-color:#fff;}
+			.mui-table-view-cell:after{left:0;}
+			.set_wrap{width:95%;margin:0 auto;}
+			.mui-btn-primary{width:100%;border-radius:0.49rem;margin-top:0.98rem;padding:0.27rem 2.23rem;font-size:0.34rem;}
+			#loginout{background-color:#0f6594;border:none;}
+			.set_text{font-size:0.3rem;color:#282828;}
+			.mui-table-view-cell{padding:14px 15px;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav sub-bar-title">
+		    <h1 class="mui-title sub-title">设置</h1>
+		</header>
+		<div class="mui-content">
+			<div class="set_wrap">
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell" id="editpwd">
+				        <a class="mui-navigate-right set_text" >修改密码</a>
+				    </li>
+				    <li class="mui-table-view-cell" id="aboutus">
+				        <a class="mui-navigate-right set_text">关于我们</a>
+				    </li>
+				    <li class="mui-table-view-cell">
+				        <a class="set_text">版本信息
+				        	<span class="mui-pull-right" style="font-size:0.28rem;color:#000;display:inline-block;margin-right:-0.3rem;">1.01</span>
+				        </a>
+				    </li>
+				</ul>
+				<div class="mui-button-row">
+			        <button type="button" class="mui-btn mui-btn-primary" id="loginout">退出登录</button>
+			    </div>
+		    </div>
+				
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				document.getElementById('editpwd').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'verify_identity.html',
+						id: 'verify_identity.html'
+					})
+				});
+				document.getElementById('aboutus').addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'aboutus.html',
+						id: 'aboutus.html'
+					})
+				});
+			})
+		</script>
+	</body>
+
+</html>

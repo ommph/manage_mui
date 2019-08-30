@@ -1,0 +1,743 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>车辆管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/rem.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/sub_common.css" rel="stylesheet" />
+		<style type="text/css">
+			::-webkit-input-placeholder{  
+		    color:#989898;  
+		    font-size:14px;
+		} 
+		ul{padding:0;margin:0;}
+		.driver_manage{width:92%;margin:10px auto;}
+		.mui-input-group .mui-input-row:after,.mui-input-group:after,.mui-input-group:before{background-color:#fff;}
+		.mui-pull-right{margin-right: 0.06rem;}
+		.mui-input-row .driver_input{border:1px solid #0f6594;border-radius:5px;position:absolute;z-index:0;}
+		.mui-input-row .mui-input-clear~.mui-icon-clear{right:1.1rem;height:0.38rem;}
+		.driver_search{font-size:17px;background-color:#0f6594;border-radius:5px;height:40px;line-height: 20px;color:#fff;display: inline-block;padding:10px;position:absolute;right:0;border-bottom-left-radius: 0;border-top-left-radius:0;}
+		
+		/*列表样式*/
+		.mui-table-view:before{background-color:#fff;}
+		.driver_list{width:100%;margin:0 auto;}
+		.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size:25px;}
+		.mui-checkbox input[type=checkbox], .mui-radio input[type=radio],.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{left:0;}
+		.mui-table-view-cell{padding: 11px 0 11px 7px;}
+		.mui-checkbox.mui-left label, .mui-radio.mui-left label{padding-left: 24px;}
+		.driver_name,.mui-ellipsis{color:#282828;}
+		.mui-pull-right{color:#0f6594;margin-top:-32px;}
+		.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before{color:#0f6594;}
+		.mui-table-view{margin:-.19rem .2rem 0 .1rem;}
+		.mui-table-view-cell:after{left:0;}
+		
+		.drivertel{margin-right: 15px;}
+		.mui-table-view-cell>a p{color:#282828;font-size:0.32rem;line-height:0.6rem;}
+		.mui-table-view-cell>a:not(.mui-btn){margin: 0 0 0 -0.1rem;}
+		.mui-table-view-cell>a .car_where{white-space: pre-wrap;}
+		.selectcar_list{height:2rem;}
+
+		
+		/*顶部选项卡样式*/		
+		.tab_text{display: block;}
+		.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{border-top:0;border-bottom:0;}
+		/*选中的底部背景色*/
+		.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar{background-color:#fff;}
+		/*默认选项卡字体颜色和大小*/
+		.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{color:#989898;font-size:.32rem;}
+		/*选中选项卡字体颜色和大小*/
+		.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{color:#0f6594;font-size:.32rem;}
+		.tab_textnumber{margin-top:-.2rem}
+		
+		.carnumber_right,.company_right{display:inline-block;margin-top:0;width:70%;text-align: right;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+		.company_right{margin-top:-1.2rem;}
+		
+		.mui-left{width:.7rem;float:left;height:2rem;margin-top:.2rem;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav sub-bar-title">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff;"></a>
+		    <h1 class="mui-title sub-title">车辆管理</h1>
+		    <!--<span id="finish" class="mui-pull-right" style="color:#fff;font-size:0.32rem;padding-top:0.2rem;margin-top:0;">完成</span>-->
+		</header>		
+		
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+            <div id="sliderSegmentControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <a class="mui-control-item mui-active" href="#all">
+                    <span class="tab_text">全部</span>
+                    <span class="tab_text tab_textnumber">200</span>
+                </a>
+                <a class="mui-control-item" href="#run">
+                   <span class="tab_text">行驶</span>
+                   <span class="tab_text tab_textnumber">0</span>
+                </a>
+                <a class="mui-control-item" href="#stop">
+                    <span class="tab_text">停止</span>
+                    <span class="tab_text tab_textnumber">0</span>
+                </a>
+                <a class="mui-control-item" href="#charge">
+                    <span class="tab_text">充电</span>
+                    <span class="tab_text tab_textnumber">0</span>
+                </a>
+                <a class="mui-control-item" href="#fault">
+                  <span class="tab_text">故障</span>
+                   <span class="tab_text tab_textnumber">0</span>
+                </a>              
+            </div>
+            
+            
+            <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3" ></div>
+            
+            <div class="mui-slider-group">
+            	<!--全部内容-->
+                <div id="all" class="md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
+                    <div class="driver_manage">
+							<form class="mui-input-group">
+							    <div class="mui-input-row" style="position:relative;">
+							        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机名称">
+							        <span class="driver_search">搜索</span>
+							    </div>
+							</form>
+						</div>		
+							
+						<!--列表内容开始-->
+						<div class="driver_list">
+							<ul class="mui-table-view">
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>	
+							   </ul>
+						</div>
+						<!--列表内容结束-->
+                </div>
+                
+                <!--行驶中的内容-->
+                <div id="run" class="bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
+                     <div class="driver_manage">
+							<form class="mui-input-group">
+							    <div class="mui-input-row" style="position:relative;">
+							        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机名称">
+							        <span class="driver_search">搜索</span>
+							    </div>
+							</form>
+						</div>		
+							
+						<!--列表内容开始-->
+						<div class="driver_list">
+							<ul class="mui-table-view">
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司行驶</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>	
+							   </ul>
+						</div>
+						<!--列表内容结束--> 
+                </div> 
+                
+                <!--停止显示的内容-->
+                <div id="stop" class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver">
+                         <div class="driver_manage">
+							<form class="mui-input-group">
+							    <div class="mui-input-row" style="position:relative;">
+							        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机名称">
+							        <span class="driver_search">搜索</span>
+							    </div>
+							</form>
+						</div>		
+							
+						<!--列表内容开始-->
+						<div class="driver_list">
+							<ul class="mui-table-view">
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司停止</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>	
+							   </ul>
+						</div>
+						<!--列表内容结束-->
+                </div> 
+                
+                <!--充电显示的内容-->
+                <div id="charge" class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver">
+                    	 <div class="driver_manage">
+							<form class="mui-input-group">
+							    <div class="mui-input-row" style="position:relative;">
+							        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机名称">
+							        <span class="driver_search">搜索</span>
+							    </div>
+							</form>
+						</div>		
+							
+						<!--列表内容开始-->
+						<div class="driver_list">
+							<ul class="mui-table-view">
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司充电</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>	
+							   </ul>
+						</div>
+						<!--列表内容结束-->
+                </div> 
+                
+                <!--故障显示的内容-->
+                <div id="fault" class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver">
+                      <div class="driver_manage">
+							<form class="mui-input-group">
+							    <div class="mui-input-row" style="position:relative;">
+							        <input type="text" class="mui-input-clear driver_input" placeholder="请输入车牌号/司机名称">
+							        <span class="driver_search">搜索</span>
+							    </div>
+							</form>
+						</div>		
+							
+						<!--列表内容开始-->
+						<div class="driver_list">
+							<ul class="mui-table-view">
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司故障</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="1">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="2">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            		<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>
+							    <li class="mui-table-view-cell mui-media selectcar_list" id="3">
+							        <a href="javascript:;">
+							        	<!--<p>状态:<span>全部</span></p>-->
+							            <!--<p>司机:<span>李三</span></p>-->
+							            <!--<div class="mui-input-row mui-checkbox mui-left">
+										  <label></label>
+										  <input name="checkbox1" value="one" type="checkbox" class="rds">
+										</div>-->
+										<div>
+											<p>车牌号
+							            	<span class="mui-pull-right carnumber_right">粤B66666</span>
+							            	</p>
+							            	<p class="car_where">所属公司
+							            	<span class="mui-pull-right company_right">鹏迪车辆管理有限公司</span>
+							            	</p>
+										</div>							            
+							        </a>
+							    </li>	
+							   </ul>
+						</div>
+						<!--列表内容结束--> 
+                </div> 
+            </div>
+            
+        </div>
+			
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();	
+		</script>
+	</body>
+
+</html>
